@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { 
   LayoutDashboard, 
@@ -6,10 +5,13 @@ import {
   History, 
   Settings, 
   ChevronLeft,
-  ChevronRight,
-  Cpu
+  Cpu,
+  Bell,
+  BarChart3,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -19,11 +21,20 @@ interface SidebarProps {
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
   { icon: Home, label: "Rooms", path: "/rooms" },
+  { icon: Cpu, label: "Devices", path: "/devices" },
+  { icon: Bell, label: "Notifications", path: "/notifications" },
+  { icon: BarChart3, label: "Analytics", path: "/analytics" },
   { icon: History, label: "History", path: "/history" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
 const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
+  const { signOut, user } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <>
       {/* Mobile overlay */}
@@ -58,7 +69,7 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
             {navItems.map((item, index) => (
               <NavLink
                 key={item.path}
@@ -78,11 +89,27 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
             ))}
           </nav>
 
+          {/* User & Logout */}
+          <div className="p-4 border-t border-white/10">
+            {user && (
+              <div className="glass-card p-3 rounded-xl mb-3">
+                <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+              </div>
+            )}
+            <button
+              onClick={handleSignOut}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-muted-foreground hover:text-red-400 hover:bg-red-500/10"
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="font-medium">Sign Out</span>
+            </button>
+          </div>
+
           {/* Footer */}
           <div className="p-4 border-t border-white/10">
-            <div className="glass-card p-4 rounded-xl">
-              <p className="text-xs text-muted-foreground text-center">
-                v1.0 • <span className="text-primary">mock mode</span>
+            <div className="text-center">
+              <p className="text-xs text-muted-foreground">
+                v1.0 • <span className="text-primary">connected</span>
               </p>
             </div>
           </div>
