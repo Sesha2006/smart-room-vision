@@ -1,4 +1,8 @@
 import { Bell, Menu, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface TopbarProps {
   title: string;
@@ -7,6 +11,53 @@ interface TopbarProps {
 }
 
 const Topbar = ({ title, subtitle, onMenuClick }: TopbarProps) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (user) {
+      fetchUnreadCount();
+      
+      // Subscribe to notification changes
+      const channel = supabase
+        .channel('topbar-notifications')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'notifications',
+            filter: `user_id=eq.${user.id}`
+          },
+          () => {
+            fetchUnreadCount();
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [user]);
+
+  const fetchUnreadCount = async () => {
+    const { count } = await supabase
+      .from('notifications')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_read', false);
+    
+    setUnreadCount(count || 0);
+  };
+
+  const getInitial = () => {
+    if (user?.user_metadata?.full_name) {
+      return user.user_metadata.full_name.charAt(0).toUpperCase();
+    }
+    return user?.email?.charAt(0).toUpperCase() || "U";
+  };
+
   return (
     <header className="h-20 flex items-center justify-between px-4 lg:px-8">
       {/* Left side */}
@@ -36,14 +87,19 @@ const Topbar = ({ title, subtitle, onMenuClick }: TopbarProps) => {
         </div>
 
         {/* Notifications */}
-        <button className="relative p-3 rounded-xl glass-card hover:bg-white/10 transition-all duration-300 group">
+        <button 
+          onClick={() => navigate('/notifications')}
+          className="relative p-3 rounded-xl glass-card hover:bg-white/10 transition-all duration-300 group"
+        >
           <Bell className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-          <span className="notification-badge">3</span>
+          {unreadCount > 0 && (
+            <span className="notification-badge">{unreadCount > 9 ? '9+' : unreadCount}</span>
+          )}
         </button>
 
         {/* User Avatar */}
         <div className="avatar-glow cursor-pointer hover:scale-105 transition-transform">
-          <span className="text-white">A</span>
+          <span className="text-white">{getInitial()}</span>
         </div>
       </div>
     </header>

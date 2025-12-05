@@ -7,6 +7,9 @@ import { cn } from "@/lib/utils";
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/": { title: "SmartRoom Dashboard", subtitle: "Welcome back, Admin" },
   "/rooms": { title: "Room Management", subtitle: "Monitor and control all rooms" },
+  "/devices": { title: "Hardware Connectivity", subtitle: "Manage your IoT devices" },
+  "/notifications": { title: "Notifications", subtitle: "System alerts and updates" },
+  "/analytics": { title: "Analytics", subtitle: "Insights and reports" },
   "/history": { title: "Activity History", subtitle: "Track all system events" },
   "/settings": { title: "Settings", subtitle: "Configure your preferences" },
 };
