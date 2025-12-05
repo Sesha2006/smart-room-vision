@@ -59,12 +59,6 @@ const Settings = () => {
 
   return (
     <div className="space-y-6 max-w-3xl">
-      {/* Header */}
-      <div className="opacity-0 animate-fade-in">
-        <h2 className="text-2xl font-bold text-foreground">Settings</h2>
-        <p className="text-muted-foreground">Configure your SmartRoom dashboard</p>
-      </div>
-
       {/* General Settings */}
       <div 
         className="glass-card p-6 opacity-0 animate-fade-in-up"

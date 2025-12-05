@@ -104,12 +104,6 @@ const History = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="opacity-0 animate-fade-in">
-        <h2 className="text-2xl font-bold text-foreground">Activity History</h2>
-        <p className="text-muted-foreground">Track all system events and alerts</p>
-      </div>
-
       {/* Timeline */}
       <div className="relative">
         {/* Vertical line */}

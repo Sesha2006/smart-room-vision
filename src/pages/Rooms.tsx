@@ -66,12 +66,7 @@ const Rooms = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="opacity-0 animate-fade-in">
-          <h2 className="text-2xl font-bold text-foreground">Room Management</h2>
-          <p className="text-muted-foreground">Monitor and control all rooms</p>
-        </div>
-        
+      <div className="flex flex-col sm:flex-row items-end sm:items-center justify-end gap-4">
         <div className="flex items-center gap-3 w-full sm:w-auto">
           {/* Search */}
           <div className="flex-1 sm:flex-none flex items-center gap-2 px-4 py-2 rounded-xl glass-card">
