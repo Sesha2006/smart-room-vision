@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { Cpu, Mail, Lock, User, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, Loader2, Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { z } from "zod";
 import { toast } from "sonner";
+import Logo from "@/components/Logo";
 
 const emailSchema = z.string().email("Please enter a valid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -102,10 +103,8 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-blue mb-4">
-            <Cpu className="w-8 h-8 text-white" />
-          </div>
+        <div className="flex flex-col items-center mb-8 animate-fade-in">
+          <Logo size="lg" showText={false} className="mb-4" />
           <h1 className="text-2xl font-bold gradient-text">SmartRoom Premium</h1>
           <p className="text-muted-foreground mt-1">IoT Room Monitoring Dashboard</p>
         </div>
