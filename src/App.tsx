@@ -15,6 +15,7 @@ import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import StudyRooms from "./pages/StudyRooms";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             }>
               <Route path="/" element={<Dashboard />} />
               <Route path="/rooms" element={<Rooms />} />
+              <Route path="/study-rooms" element={<StudyRooms />} />
               <Route path="/devices" element={<Devices />} />
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/analytics" element={<Analytics />} />
