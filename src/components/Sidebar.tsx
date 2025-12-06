@@ -5,13 +5,14 @@ import {
   History, 
   Settings, 
   ChevronLeft,
-  Cpu,
   Bell,
   BarChart3,
-  LogOut
+  LogOut,
+  Cpu
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
+import Logo from "@/components/Logo";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -57,15 +58,7 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
         <div className="h-full glass-card rounded-none lg:rounded-r-3xl flex flex-col">
           {/* Logo */}
           <div className="p-6 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-blue">
-                <Cpu className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold gradient-text">SmartRoom</h1>
-                <p className="text-xs text-muted-foreground">Premium Edition</p>
-              </div>
-            </div>
+            <Logo size="md" />
           </div>
 
           {/* Navigation */}

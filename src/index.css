@@ -284,3 +284,15 @@
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
+
+/* Hide external branding elements */
+[data-lovable-badge],
+.lovable-badge,
+a[href*="lovable.dev"]:not(.keep-branding),
+div[class*="lovable"],
+iframe[src*="lovable"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
