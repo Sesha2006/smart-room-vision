@@ -133,6 +133,299 @@ export type Database = {
         }
         Relationships: []
       }
+      reservations: {
+        Row: {
+          auto_assigned: boolean | null
+          checked_in_at: string | null
+          checked_out_at: string | null
+          created_at: string | null
+          end_time: string
+          id: string
+          preferences: Json | null
+          room_id: string
+          seat_id: string
+          start_time: string
+          status: Database["public"]["Enums"]["reservation_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          auto_assigned?: boolean | null
+          checked_in_at?: string | null
+          checked_out_at?: string | null
+          created_at?: string | null
+          end_time: string
+          id?: string
+          preferences?: Json | null
+          room_id: string
+          seat_id: string
+          start_time: string
+          status?: Database["public"]["Enums"]["reservation_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          auto_assigned?: boolean | null
+          checked_in_at?: string | null
+          checked_out_at?: string | null
+          created_at?: string | null
+          end_time?: string
+          id?: string
+          preferences?: Json | null
+          room_id?: string
+          seat_id?: string
+          start_time?: string
+          status?: Database["public"]["Enums"]["reservation_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservations_seat_id_fkey"
+            columns: ["seat_id"]
+            isOneToOne: false
+            referencedRelation: "seats"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      room_analytics: {
+        Row: {
+          avg_duration_minutes: number | null
+          created_at: string | null
+          date: string
+          hour: number
+          id: string
+          no_shows: number | null
+          occupancy_rate: number | null
+          peak_occupancy: number | null
+          room_id: string
+          total_reservations: number | null
+        }
+        Insert: {
+          avg_duration_minutes?: number | null
+          created_at?: string | null
+          date: string
+          hour: number
+          id?: string
+          no_shows?: number | null
+          occupancy_rate?: number | null
+          peak_occupancy?: number | null
+          room_id: string
+          total_reservations?: number | null
+        }
+        Update: {
+          avg_duration_minutes?: number | null
+          created_at?: string | null
+          date?: string
+          hour?: number
+          id?: string
+          no_shows?: number | null
+          occupancy_rate?: number | null
+          peak_occupancy?: number | null
+          room_id?: string
+          total_reservations?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_analytics_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rooms: {
+        Row: {
+          building: string | null
+          capacity: number
+          created_at: string | null
+          features: Json | null
+          floor: number
+          id: string
+          name: string
+          operating_hours: Json | null
+          status: Database["public"]["Enums"]["room_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          building?: string | null
+          capacity?: number
+          created_at?: string | null
+          features?: Json | null
+          floor?: number
+          id?: string
+          name: string
+          operating_hours?: Json | null
+          status?: Database["public"]["Enums"]["room_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          building?: string | null
+          capacity?: number
+          created_at?: string | null
+          features?: Json | null
+          floor?: number
+          id?: string
+          name?: string
+          operating_hours?: Json | null
+          status?: Database["public"]["Enums"]["room_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      seats: {
+        Row: {
+          col_position: number
+          created_at: string | null
+          features: Json | null
+          id: string
+          last_occupied_at: string | null
+          last_vacant_at: string | null
+          room_id: string
+          row_position: number
+          seat_number: string
+          sensor_id: string | null
+          status: Database["public"]["Enums"]["seat_status"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          col_position: number
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          last_occupied_at?: string | null
+          last_vacant_at?: string | null
+          room_id: string
+          row_position: number
+          seat_number: string
+          sensor_id?: string | null
+          status?: Database["public"]["Enums"]["seat_status"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          col_position?: number
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          last_occupied_at?: string | null
+          last_vacant_at?: string | null
+          room_id?: string
+          row_position?: number
+          seat_number?: string
+          sensor_id?: string | null
+          status?: Database["public"]["Enums"]["seat_status"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seats_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sensor_readings: {
+        Row: {
+          battery_level: number | null
+          confidence: number | null
+          id: string
+          is_online: boolean | null
+          rssi: number | null
+          seat_id: string
+          sensor_type: string
+          timestamp: string | null
+          value: Json
+        }
+        Insert: {
+          battery_level?: number | null
+          confidence?: number | null
+          id?: string
+          is_online?: boolean | null
+          rssi?: number | null
+          seat_id: string
+          sensor_type: string
+          timestamp?: string | null
+          value: Json
+        }
+        Update: {
+          battery_level?: number | null
+          confidence?: number | null
+          id?: string
+          is_online?: boolean | null
+          rssi?: number | null
+          seat_id?: string
+          sensor_type?: string
+          timestamp?: string | null
+          value?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sensor_readings_seat_id_fkey"
+            columns: ["seat_id"]
+            isOneToOne: false
+            referencedRelation: "seats"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      waitlist: {
+        Row: {
+          expires_at: string | null
+          id: string
+          notified_at: string | null
+          preferences: Json | null
+          priority: number | null
+          requested_at: string | null
+          room_id: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          expires_at?: string | null
+          id?: string
+          notified_at?: string | null
+          preferences?: Json | null
+          priority?: number | null
+          requested_at?: string | null
+          room_id: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          expires_at?: string | null
+          id?: string
+          notified_at?: string | null
+          preferences?: Json | null
+          priority?: number | null
+          requested_at?: string | null
+          room_id?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "waitlist_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -141,7 +434,20 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      reservation_status:
+        | "pending"
+        | "confirmed"
+        | "checked_in"
+        | "completed"
+        | "cancelled"
+        | "no_show"
+      room_status: "active" | "maintenance" | "closed"
+      seat_status:
+        | "available"
+        | "reserved"
+        | "occupied"
+        | "offline"
+        | "maintenance"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -268,6 +574,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      reservation_status: [
+        "pending",
+        "confirmed",
+        "checked_in",
+        "completed",
+        "cancelled",
+        "no_show",
+      ],
+      room_status: ["active", "maintenance", "closed"],
+      seat_status: [
+        "available",
+        "reserved",
+        "occupied",
+        "offline",
+        "maintenance",
+      ],
+    },
   },
 } as const
