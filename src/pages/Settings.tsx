@@ -307,7 +307,7 @@ const Settings = () => {
           </div>
           <div className="flex items-center justify-between p-4 rounded-xl bg-white/5">
             <span className="text-muted-foreground">Backend</span>
-            <span className="text-primary">Lovable Cloud</span>
+            <span className="text-primary">SmartRoom</span>
           </div>
         </div>
       </div>
@@ -317,7 +317,7 @@ const Settings = () => {
         className="text-center text-sm text-muted-foreground opacity-0 animate-fade-in"
         style={{ animationDelay: "400ms" }}
       >
-        <p>Made with ❤️ for IoT enthusiasts</p>
+   
         <p className="mt-1">© 2025 SmartRoom Premium. All rights reserved.</p>
       </div>
     </div>

@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
-import Logo from "@/components/Logo";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -56,12 +55,8 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
         )}
       >
         <div className="h-full glass-card rounded-none lg:rounded-r-3xl flex flex-col">
-          {/* Logo */}
-          <div className="p-6 border-b border-white/10">
-            <Logo size="md" />
-          </div>
 
-          {/* Navigation */}
+          {/* Navigation (Top - No Logo, No Text, No Space) */}
           <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
             {navItems.map((item, index) => (
               <NavLink
